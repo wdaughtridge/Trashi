@@ -14,6 +14,7 @@
 		2CC60A6427075A1D00202BE9 /* TrashiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC60A6327075A1D00202BE9 /* TrashiTests.swift */; };
 		2CC60A6E27075A1D00202BE9 /* TrashiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC60A6D27075A1D00202BE9 /* TrashiUITests.swift */; };
 		2CC60A7027075A1D00202BE9 /* TrashiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC60A6F27075A1D00202BE9 /* TrashiUITestsLaunchTests.swift */; };
+		2CC60A842707660200202BE9 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 2CC60A832707660200202BE9 /* CodeScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CC60A842707660200202BE9 /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +145,9 @@
 			dependencies = (
 			);
 			name = Trashi;
+			packageProductDependencies = (
+				2CC60A832707660200202BE9 /* CodeScanner */,
+			);
 			productName = Trashi;
 			productReference = 2CC60A4F27075A1D00202BE9 /* Trashi.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +220,9 @@
 				Base,
 			);
 			mainGroup = 2CC60A4627075A1D00202BE9;
+			packageReferences = (
+				2CC60A822707660200202BE9 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			productRefGroup = 2CC60A5027075A1D00202BE9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -419,8 +427,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Trashi/Preview Content\"";
+				DEVELOPMENT_TEAM = HMN7G332RB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -448,8 +458,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Trashi/Preview Content\"";
+				DEVELOPMENT_TEAM = HMN7G332RB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -601,6 +613,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2CC60A822707660200202BE9 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2CC60A832707660200202BE9 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CC60A822707660200202BE9 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2CC60A4727075A1D00202BE9 /* Project object */;
 }
