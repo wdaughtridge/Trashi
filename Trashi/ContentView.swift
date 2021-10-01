@@ -15,37 +15,30 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            if (colorScheme == .dark) {
-                Image("Logo - dark")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.horizontal, 100.0)
+            if self.scannedCode != nil {
+                // scannedCode is the UPC number
+                Text(self.scannedCode ?? "Nothing found 😢")
             } else {
-                Image("Logo")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.horizontal, 100.0)
-            }
-            
-            Button {
-                self.isPresentingScanner = true
-            } label: {
-                Text("Scan Barcode")
-                            .font(.headline)
-                            .foregroundColor(Color.white)
-                            .padding()
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .background(Color(red: 43/255, green: 74/255, blue: 52/255))
-                            .cornerRadius(40.0)
-            }
-            .padding(.horizontal, 40.0)
-            .sheet(isPresented: $isPresentingScanner) {
-                self.scannerSheet
+                if (colorScheme == .dark) {
+                    LogoDark()
+                } else {
+                    LogoLight()
+                }
+                
+                Button {
+                    self.isPresentingScanner = true
+                } label: {
+                    ScanBarcode()
+                }
+                .padding(.horizontal, 40.0)
+                .sheet(isPresented: $isPresentingScanner) {
+                    self.scannerSheet
+                }
             }
         }
     }
 
-    var scannerSheet : some View {
+    var scannerSheet: some View {
         CodeScannerView(
             codeTypes: [.code39, .code128, .code93, .upce, .code39Mod43, .ean13, .ean8],
             completion: { result in
