@@ -17,7 +17,23 @@ struct ContentView: View {
         VStack {
             if self.scannedCode != nil {
                 // scannedCode is the UPC number
-                Text(self.scannedCode ?? "Nothing found 😢")
+                Button {
+                    self.scannedCode = nil
+                } label: {
+                    Text("Back")
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        .padding()
+                        .background(Color(red: 43/255, green: 74/255, blue: 52/255))
+                        .cornerRadius(40.0)
+                }
+                .padding(.vertical, 20.0)
+                
+                if ((self.scannedCode) != nil) {
+                    Text("Code: " + self.scannedCode!)
+                } else {
+                    Text("Nothing found 😢")
+                }
             } else {
                 if (colorScheme == .dark) {
                     LogoDark()
