@@ -8,39 +8,29 @@
 import SwiftUI
 import CodeScanner
 
+class ScannedCodeHelper: ObservableObject {
+    @Published var scannedCode: String? = nil
+}
+
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State var isPresentingScanner = false
-    @State var scannedCode: String?
+    @ObservedObject private var scannedCodeHelper = ScannedCodeHelper()
+    @State private var isPresentingScanner = false
 
     var body: some View {
         VStack {
-            if self.scannedCode != nil {
-                // scannedCode is the UPC number
-                Button {
-                    self.scannedCode = nil
-                } label: {
-                    Text("Back")
-                        .font(.headline)
-                        .foregroundColor(Color.white)
-                        .padding()
-                        .background(Color(red: 43/255, green: 74/255, blue: 52/255))
-                        .cornerRadius(40.0)
-                }
-                .padding(.vertical, 20.0)
-                
-                if ((self.scannedCode) != nil) {
-                    Text("Code: " + self.scannedCode!)
-                } else {
-                    Text("Nothing found 😢")
-                }
+            if (scannedCodeHelper.scannedCode != nil) {
+                // Display results if scanning of code successful
+                ResultsView(scannedCodeHelper: self.scannedCodeHelper)
             } else {
+                // Change logo depending on dark/light mode
                 if (colorScheme == .dark) {
                     LogoDark()
                 } else {
                     LogoLight()
                 }
                 
+                // Pull up camera sheet for scanning barcode
                 Button {
                     self.isPresentingScanner = true
                 } label: {
@@ -59,7 +49,7 @@ struct ContentView: View {
             codeTypes: [.code39, .code128, .code93, .upce, .code39Mod43, .ean13, .ean8],
             completion: { result in
                 if case let .success(code) = result {
-                    self.scannedCode = code
+                    scannedCodeHelper.scannedCode = code
                     self.isPresentingScanner = false
                 }
             }

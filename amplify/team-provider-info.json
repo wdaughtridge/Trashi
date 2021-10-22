@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-trashi-dev-80130-authRole",
+      "UnauthRoleArn": "arn:aws:iam::195549151858:role/amplify-trashi-dev-80130-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::195549151858:role/amplify-trashi-dev-80130-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-trashi-dev-80130-deployment",
+      "UnauthRoleName": "amplify-trashi-dev-80130-unauthRole",
+      "StackName": "amplify-trashi-dev-80130",
+      "StackId": "arn:aws:cloudformation:us-east-1:195549151858:stack/amplify-trashi-dev-80130/ccba1770-332f-11ec-ba76-0a610b1e49cf",
+      "AmplifyAppId": "dbhdvldvutii"
+    }
+  }
+}
