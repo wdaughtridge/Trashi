@@ -1,6 +1,0 @@
-type Item @model {
-  id: ID!
-  name: String!
-  material: String!
-  description: String
-}
