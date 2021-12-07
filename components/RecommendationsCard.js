@@ -7,7 +7,6 @@ export default function RecommendationsCard(props) {
             <View style={styles.cardContent}>
                 {props.children}
             </View>
-
         </View>
     );
 }

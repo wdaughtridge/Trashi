@@ -4,8 +4,12 @@ import RecommendationsCard from "../components/RecommendationsCard";
 
 
 
-export default function ItemInfoScreen() {
+export default function ItemInfoScreen(props) {
   const handlePress = () => alert("Text pressed");
+
+  const regulationsRaw = "Place in recycling. Empty and rinse. Leave cap on.";
+  const regulationsArr = regulationsRaw.split(". ");
+
   return (
         <SafeAreaView style={styles.container}>  
         <Image style={styles.x} source={require('../assets/x.png')}/>
@@ -20,9 +24,16 @@ export default function ItemInfoScreen() {
             <Text style={styles.h2}>
                 Recommendations
             </Text>
-
+            
             <RecommendationsCard>
-                <Text>Test</Text>
+                <View style={styles.recContainer}>
+                  <Image style={styles.recIcon} source={require('../assets/barcode-scan.png')}/>
+                  <Text style={styles.recText}>recommendation text</Text>
+                </View>
+                <View style={styles.recContainer}>
+                  <Image style={styles.recIcon} source={require('../assets/barcode-scan.png')}/>
+                  <Text style={styles.recText}>recommendation text</Text>
+                </View>
             </RecommendationsCard>
 
             <Text style={styles.h2}>
@@ -84,5 +95,19 @@ const styles = StyleSheet.create({
     color: "#2F2F2F",
     fontFamily: "arial",
     fontWeight: "500",
+  },
+  recContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  recIcon: {
+    width: 30,
+    height: 30,
+  },
+  recText: {
+    marginTop: 5,
+    marginLeft: 12,
+    fontSize: 16,
   },
 });
