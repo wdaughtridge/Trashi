@@ -20,6 +20,7 @@ export default function ItemInfoScreen(props) {
             <Text style={styles.itemName}>
                 Item Name Place Holder
             </Text>
+            <Image style={styles.accent} resizeMode="contain" source={require('../assets/green-accent.png')}/>
 
             <Text style={styles.h2}>
                 Recommendations
@@ -27,11 +28,23 @@ export default function ItemInfoScreen(props) {
             
             <RecommendationsCard>
                 <View style={styles.recContainer}>
-                  <Image style={styles.recIcon} source={require('../assets/barcode-scan.png')}/>
+                  <Image style={styles.recIcon} resizeMode="contain" source={require('../assets/recycle.png')}/>
                   <Text style={styles.recText}>recommendation text</Text>
                 </View>
                 <View style={styles.recContainer}>
-                  <Image style={styles.recIcon} source={require('../assets/barcode-scan.png')}/>
+                  <Image style={styles.recIcon} resizeMode="contain" source={require('../assets/rinse.png')}/>
+                  <Text style={styles.recText}>recommendation text</Text>
+                </View>
+                <View style={styles.recContainer}>
+                  <Image style={styles.recIcon} resizeMode="contain" source={require('../assets/bottlecap.png')}/>
+                  <Text style={styles.recText}>recommendation text</Text>
+                </View>
+                <View style={styles.recContainer}>
+                  <Image style={styles.recIcon} resizeMode="contain" source={require('../assets/no-bag.png')}/>
+                  <Text style={styles.recText}>recommendation text</Text>
+                </View>
+                <View style={styles.recContainer}>
+                  <Image style={styles.recIcon} resizeMode="contain" source={require('../assets/cork.png')}/>
                   <Text style={styles.recText}>recommendation text</Text>
                 </View>
             </RecommendationsCard>
@@ -89,21 +102,25 @@ const styles = StyleSheet.create({
     top: 25,
   },
   h2: {
-    marginTop: 20,
+    marginTop: 10,
 
     fontSize: 18,
     color: "#2F2F2F",
     fontFamily: "arial",
     fontWeight: "500",
   },
+  accent: {
+    marginTop: 0,
+    width:25,
+  },
   recContainer: {
     flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 8,
+    marginBottom: 8,
   },
   recIcon: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 30
   },
   recText: {
     marginTop: 5,

@@ -25,7 +25,7 @@ function Settings() {
 function Notifications() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications!</Text>
+      <Text>Flashlight! this shouldn't be a page, flashlight should just turn on. will need to be added later</Text>
     </View>
   );
 }
@@ -46,17 +46,17 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Scanner',
           tabBarIcon: ({ color, size }) => (
-            <Image style={styles.icon} source={require('../assets/barcode-scan.png')}/>
+            <Image style={styles.icon} resizeMode="contain" source={require('../assets/barcode.png')}/>
           ),
         }}
       />
       <Tab.Screen
-        name="Notifications"
+        name="Flashlight"
         component={Notifications}
         options={{
-          tabBarLabel: 'Updates',
+          tabBarLabel: 'Flashlight',
           tabBarIcon: ({ color, size }) => (
-            <Image style={styles.icon} source={require('../assets/flashlight.png')}/>
+            <Image style={styles.icon} resizeMode="contain" source={require('../assets/flashlight-turn-on.png')}/>
           ),
         }}
       />
@@ -66,7 +66,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => (
-            <Image style={styles.icon} source={require('../assets/cog-outline.png')}/>
+            <Image style={styles.icon} resizeMode="contain" source={require('../assets/cog.png')}/>
           ),
         }}
       />

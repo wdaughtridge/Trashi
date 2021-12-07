@@ -19,7 +19,10 @@ const styles = StyleSheet.create({
         elevation: 3,
         shadowOffset: { width: 1, heigh: 1 },
         width: 325,
-        padding: 25
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     cardContent: {
 
