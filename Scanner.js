@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Scanner = ({ navigation, route }) => {
     const [hasPermission, setHasPermission] = useState(null);
@@ -29,11 +30,11 @@ const Scanner = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
-        <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={StyleSheet.absoluteFillObject}
-        />
-        {scanned && <Pressable style={styles.button} onPress={() => setScanned(false)}><Text style={styles.text}>Tap to Scan Again</Text></Pressable>}
+            <BarCodeScanner
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                style={StyleSheet.absoluteFillObject}
+            />
+            {scanned && <Pressable style={styles.button} onPress={() => setScanned(false)}><Text style={styles.text}>Tap to Scan Again</Text></Pressable>}
         </View>
     );
 };
