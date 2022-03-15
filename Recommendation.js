@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Image} from 'react-native';
+import { View, Image} from 'react-native';
+import styles from './Styles';
 
 const RecommendationsCard = (props) => {
     return (

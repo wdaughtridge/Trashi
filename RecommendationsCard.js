@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import styles from './Styles';
 
 const RecommendationsCard = (props) => {
     return (
@@ -10,20 +11,5 @@ const RecommendationsCard = (props) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    card: {
-        marginTop: 10,
-        borderRadius: 10,
-        backgroundColor: "#fff",
-        elevation: 3,
-        shadowOffset: { width: 1, heigh: 1 },
-        width: 325,
-        padding: 25
-    },
-    cardContent: {
-
-    },
-});
 
 export default RecommendationsCard;

@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { ScrollView, ActivityIndicator, StyleSheet, Text, Image, View, SafeAreaView } from "react-native";
+import React, { useState, useEffect, useContext } from 'react';
+import { ScrollView, ActivityIndicator, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import RecommendationsCard from "./RecommendationsCard";
 
+// Amplify
 import { API, graphqlOperation } from 'aws-amplify';
 import { createLogItem } from './src/graphql/mutations';
 import * as queries from './src/graphql/queries';
 
+// Utility
+import AppContext from './AppContext';
+import styles from './Styles';
+
 const Results = ({ navigation, route }) => {
+    const settings = useContext(AppContext);
     const [item, setItem] = useState([]);
     const [regulation, setRegulation] = useState([]);
     const { upc } = route.params;
@@ -14,7 +20,7 @@ const Results = ({ navigation, route }) => {
 
     async function fetchItem(data) {
         try {
-            const itemData = await API.graphql({ query: queries.getItem, variables: { id: data }});
+            const itemData = await API.graphql({ query: queries.getItem, variables: { id: data } });
             if (itemData.data.getItem !== null) {
                 setItem(itemData.data.getItem);
                 fetchRegulation(itemData.data.getItem.material, 'Washington DC');
@@ -42,17 +48,21 @@ const Results = ({ navigation, route }) => {
 
     async function fetchRegulation(material, region) {
         try {
-            const regulationData = await API.graphql({ 
-                query: queries.listRegulations, 
-                variables: { 
+            const regulationData = await API.graphql({
+                query: queries.listRegulations,
+                variables: {
                     filter: {
                         and: [
-                            {material: {
-                                eq: `${material}`
-                            }},
-                            {region: {
-                                eq: `${region}`
-                            }}
+                            {
+                                material: {
+                                    eq: `${material}`
+                                }
+                            },
+                            {
+                                region: {
+                                    eq: `${region}`
+                                }
+                            }
                         ]
                     }
                 }
@@ -78,38 +88,38 @@ const Results = ({ navigation, route }) => {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.contentArea}>
-                    <ActivityIndicator size="large"/>
+                    <ActivityIndicator size="large" />
                 </View>
             </SafeAreaView>
         );
     }
-    
+
     if (item !== null && Object.keys(item).length !== 0 && regulation !== null && Object.keys(regulation).length !== 0) {
         return (
-            <SafeAreaView style={styles.container}>  
+            <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.contentArea}>
-                    <Text style={styles.titleText}>
+                    <Text style={settings.largeEnabled ? styles.titleTextLarge : styles.titleText}>
                         Results
                     </Text>
-    
+
                     <RecommendationsCard>
-                        <Text style={styles.itemName}>
+                        <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
                             Name: {item.name}
                         </Text>
-    
-                        <Text style={styles.itemName}>
+
+                        <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
                             Material: {item.material}
                         </Text>
-    
-                        <Text style={styles.itemName}>
+
+                        <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
                             Description: {item.description}
                         </Text>
-    
-                        <Text style={styles.itemName}>
+
+                        <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
                             Region: {regulation.region}
                         </Text>
                     </RecommendationsCard>
-                
+
                     <Text style={styles.h1}>
                         Recommendations
                     </Text>
@@ -119,11 +129,11 @@ const Results = ({ navigation, route }) => {
                             <Text style={styles.recText}>{regulation.suggestion}</Text>
                         </View>
                     </RecommendationsCard>
-    
+
                     <Text style={styles.h1}>
                         Regulations Citation
                     </Text>
-    
+
                     <RecommendationsCard>
                         <Text>Solid Waste Management Administration, Mayor's List, Sec II, I, c</Text>
                     </RecommendationsCard>
@@ -135,15 +145,15 @@ const Results = ({ navigation, route }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View>
-                <Text style={styles.titleText}>
+                <Text style={settings.largeEnabled ? styles.titleTextLarge : styles.titleText}>
                     Oh no!
                 </Text>
 
                 <RecommendationsCard>
-                    <Text style={styles.itemName}>
+                    <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
                         No item was found in our database matching that barcode.
                     </Text>
-                    <Text style={styles.itemName}>
+                    <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
                         Don't worry though - we have logged your scan and will add the item soon!
                     </Text>
                 </RecommendationsCard>
@@ -151,72 +161,5 @@ const Results = ({ navigation, route }) => {
         </SafeAreaView>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#F4F9FA",
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    titleText: {
-        fontSize: 40,
-        fontWeight: "bold"
-    },
-    contentArea: {
-        marginTop: 20,
-    },
-    imageContainer: {
-        width: 325,
-        height: 120,
-        backgroundColor: "#fff",
-        borderRadius: 10,
-    },
-    itemName: {
-        marginVertical: 10,
-        fontWeight: "bold",
-        color: "#2F2F2F",
-        fontSize: 24,
-        // fontFamily: "arial",
-        fontWeight: "200",
-    },
-    x: {
-        position: "absolute",
-        width: 30,
-        height: 30,
-        right: 10,
-        top: 25,
-    },
-    h1: {
-        marginTop: 20,
-
-        fontSize: 28,
-        color: "#2F2F2F",
-        // fontFamily: "arial",
-        fontWeight: "500",
-    },
-    h2: {
-        marginTop: 20,
-
-        fontSize: 18,
-        color: "#2F2F2F",
-        // fontFamily: "arial",
-        fontWeight: "500",
-    },
-    recContainer: {
-        flexDirection: 'row',
-        marginTop: 10,
-        marginBottom: 10,
-    },
-    recIcon: {
-        width: 30,
-        height: 30,
-    },
-    recText: {
-        marginTop: 5,
-        marginLeft: 12,
-        fontSize: 16,
-    },
-});
 
 export default Results;
