@@ -86,7 +86,7 @@ const Results = ({ navigation, route }) => {
 
     if ((item === null || regulation === null || Object.keys(regulation).length === 0 || Object.keys(regulation).length === 0) && success === true) {
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <View style={styles.contentArea}>
                     <ActivityIndicator size="large" />
                 </View>
@@ -96,46 +96,46 @@ const Results = ({ navigation, route }) => {
 
     if (item !== null && Object.keys(item).length !== 0 && regulation !== null && Object.keys(regulation).length !== 0) {
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <ScrollView style={styles.contentArea}>
-                    <Text style={settings.largeEnabled ? styles.titleTextLarge : styles.titleText}>
+                    <Text style={[settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         Results
                     </Text>
 
                     <RecommendationsCard>
-                        <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
+                        <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                             Name: {item.name}
                         </Text>
 
-                        <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
+                        <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                             Material: {item.material}
                         </Text>
 
-                        <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
+                        <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                             Description: {item.description}
                         </Text>
 
-                        <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
+                        <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                             Region: {regulation.region}
                         </Text>
                     </RecommendationsCard>
 
-                    <Text style={styles.h1}>
+                    <Text style={[styles.h1, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         Recommendations
                     </Text>
                     <RecommendationsCard>
                         <View style={styles.recContainer}>
                             {/* <Image style={styles.recIcon} source={require('./assets/recycle.png')}/> */}
-                            <Text style={styles.recText}>{regulation.suggestion}</Text>
+                            <Text style={[styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>{regulation.suggestion}</Text>
                         </View>
                     </RecommendationsCard>
 
-                    <Text style={styles.h1}>
+                    <Text style={[styles.h1, , settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         Regulations Citation
                     </Text>
 
                     <RecommendationsCard>
-                        <Text>Solid Waste Management Administration, Mayor's List, Sec II, I, c</Text>
+                        <Text style={[styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Solid Waste Management Administration, Mayor's List, Sec II, I, c</Text>
                     </RecommendationsCard>
                 </ScrollView>
             </SafeAreaView>
@@ -143,17 +143,17 @@ const Results = ({ navigation, route }) => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
             <View>
-                <Text style={settings.largeEnabled ? styles.titleTextLarge : styles.titleText}>
+                <Text style={[settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                     Oh no!
                 </Text>
 
                 <RecommendationsCard>
-                    <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
+                    <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         No item was found in our database matching that barcode.
                     </Text>
-                    <Text style={settings.largeEnabled ? styles.itemNameLarge : styles.itemName}>
+                    <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         Don't worry though - we have logged your scan and will add the item soon!
                     </Text>
                 </RecommendationsCard>

@@ -7,16 +7,22 @@ import RecommendationsCard from './RecommendationsCard';
 import AppContext from './AppContext';
 import styles from './Styles';
 
+
 const Settings = ({ navigation }) => {
     const settings = useContext(AppContext);
 
+    const getColor = (navigation) => {
+        let darkColor = "#fff"
+    }
+    
+
     return (
-        <View style={styles.settingsContainer}>
-            <Text style={settings.largeEnabled ? styles.titleTextLarge : styles.titleText}>Settings</Text> 
-                <Text style={settings.largeEnabled ? styles.h1Large : styles.h1}>Location: </Text>
-                <Text style={settings.largeEnabled ? styles.h2Large : styles.h2}>Washington, DC</Text>
+        <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
+            <Text style={[styles.font, settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Settings</Text> 
+                <Text style={[styles.font, settings.largeEnabled ? styles.h1Large : styles.h1, settings.darkEnabled ? styles.textDark : styles.textLight]}>Location: </Text>
+                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Washington, DC</Text>
                 <View style={styles.settingsElement}>
-                    <Text style={settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText}>Sound </Text>
+                    <Text style={[settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Sound </Text>
                     <Switch
                         thumbColor="#fff"
                         ios_backgroundColor={settings.soundEnabled ? "#45B972" : "#BCBCBC"}
@@ -29,7 +35,7 @@ const Settings = ({ navigation }) => {
                     </Text>
                 </View>
                 <View style={styles.settingsElement}>
-                    <Text style={settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText}>Read text aloud </Text>
+                    <Text style={[settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Read text aloud </Text>
                     <Switch
                         thumbColor="#fff"
                         ios_backgroundColor={settings.readEnabled ? "#45B972" : "#BCBCBC"}
@@ -39,7 +45,7 @@ const Settings = ({ navigation }) => {
                     />
                 </View>
                 <View style={styles.settingsElement}>
-                    <Text style={settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText}>Dark mode </Text>
+                    <Text style={[settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Dark mode </Text>
                     <Switch
                         thumbColor="#fff"
                         ios_backgroundColor={settings.darkEnabled ? "#45B972" : "#BCBCBC"}
@@ -49,7 +55,7 @@ const Settings = ({ navigation }) => {
                     />
                 </View>
                 <View style={styles.settingsElement}>
-                    <Text style={settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText}>Large font </Text>
+                    <Text style={[settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Large font </Text>
                     <Switch
                         thumbColor="#fff"
                         ios_backgroundColor={settings.largeEnabled ? "#45B972" : "#BCBCBC"}
@@ -58,7 +64,7 @@ const Settings = ({ navigation }) => {
                         style={styles.settingsToggle}
                     />
                 </View>
-            <StatusBar style="auto" />
+            <StatusBar style={"auto"}/>
         </View>
     );
 };

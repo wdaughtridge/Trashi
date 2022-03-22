@@ -11,9 +11,9 @@ const Progress = ({ navigation }) => {
     const settings = useContext(AppContext);
 
     return (
-        <View style={styles.settingsContainer}>
-            <Text style={settings.largeEnabled ? styles.titleTextLarge : styles.titleText}>My Progress</Text> 
-            <Text style={settings.largeEnabled ? styles.h2Large : styles.h2}>Recycled Items This Month</Text>
+        <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
+            <Text style={[settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>My Progress</Text> 
+            <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Recycled Items This Month</Text>
 
                 
             <StatusBar style="auto" />

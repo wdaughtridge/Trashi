@@ -58,6 +58,12 @@ const App = () => {
     largeToggleSwitch,
   };
 
+if (settings.darkEnabled) {
+  var darkText = "#fff"
+} else {
+  var darkText = "#2F2F2F"
+}
+
   return (
     <AppContext.Provider value={settings}>
       <NavigationContainer>

@@ -4,23 +4,63 @@ import { Dimensions } from 'react-native';
 
 var { height, phoneWidth } = Dimensions.get('window');
 
+
 // Global stylesheet for all pages.
 // Only add styles here - do not separate out in page files.
 
+
 const styles = StyleSheet.create({
+    textDark: {
+        color: "#fff"
+    },
+    textLight: {
+        color: "#2F2F2F"
+    },
+    backgroundDark: {
+        backgroundColor: '#16131D',
+    },
+    backgroundLight: {
+        backgroundColor: '#F4F9FA',
+    },
+    cardBackgroundDark: {
+        backgroundColor: "#25242C",
+    },
+    cardBackgroundLight: {
+        backgroundColor: "#fff",
+    },
+    flashlightButtonDark: {
+        backgroundColor: '#25242C',
+        shadowColor: '#0E0E10',
+    },
+    flashlightButtonLight: {
+        backgroundColor: '#fff',
+        shadowColor: '#E0DFDF',
+    },
+
+    
     container: {
         flex: 1,
-        backgroundColor: "#F4F9FA",
         justifyContent: 'center',
         alignItems: 'center',
     },
-    titleTextLarge: {
+    containerDark: {
+        flex: 1,
+        backgroundColor: "#16131D",
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    statusBarStyle: {
+        paddingHorizontal: 20, 
+        height: 10,
+    },
+    font : {
         fontFamily: "Avenir",
+    },
+    titleTextLarge: {
         fontSize: 40,
         fontWeight: "bold"
     },
     titleText: {
-        fontFamily: "Avenir",
         fontSize: 35,
         fontWeight: "bold"
     },
@@ -57,11 +97,18 @@ const styles = StyleSheet.create({
         right: 10,
         top: 25,
     },
+    h1: {
+        fontFamily: "Avenir",
+        marginTop: 20,
+        fontSize: 25,
+
+        fontWeight: "500",
+    },
     h1Large: {
         fontFamily: "Avenir",
         marginTop: 20,
         fontSize: 30,
-        color: "#2F2F2F",
+
         fontWeight: "500",
     },
     h2Large: {
@@ -70,14 +117,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "#2F2F2F",
         fontWeight: "500",
-    },
-    h1: {
-        fontFamily: "Avenir",
-        marginTop: 20,
-        fontSize: 25,
-        color: "#2F2F2F",
-        fontWeight: "500",
-        
     },
     h2: {
         fontFamily: "Avenir",
@@ -125,7 +164,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -186,8 +224,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         borderRadius: 100,
         elevation: 3,
-        backgroundColor: '#fff',
-        shadowColor: '#E0DFDF',
+        
         shadowOffset: {width: 0, height: 3},
         shadowOpacity: 1,
         shadowRadius: 0,
@@ -202,7 +239,6 @@ const styles = StyleSheet.create({
     card: {
         marginTop: 10,
         borderRadius: 10,
-        backgroundColor: "#fff",
         elevation: 3,
         shadowOffset: { width: 1, height: 1 },
         width: 325,
@@ -210,7 +246,6 @@ const styles = StyleSheet.create({
     },
     settingsContainer: {
         flex: 1,
-        backgroundColor: '#F4F9FA',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -224,7 +259,6 @@ const styles = StyleSheet.create({
         fontFamily: "Avenir",
         marginTop: 20,
         fontSize: 25,
-        color: "#2F2F2F",
         fontWeight: "300",
         width: 240
     },
@@ -232,10 +266,10 @@ const styles = StyleSheet.create({
         fontFamily: "Avenir",
         marginTop: 20,
         fontSize: 30,
-        color: "#2F2F2F",
         fontWeight: "300",
         width: 240
     },
+
     settingsToggle: {
         marginTop: 20,
     }

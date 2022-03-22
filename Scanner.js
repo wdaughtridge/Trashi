@@ -43,7 +43,7 @@ const Scanner = ({ navigation, route }) => {
       <Camera style={styles.camera} type={type} flashMode={flash} onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}>
         <View style={styles.butttonContainer}>
           <TouchableOpacity
-            style={styles.flashlightButton}
+            style={[styles.flashlightButton, settings.darkEnabled ? styles.flashlightButtonDark : styles.flashlightButtonLight]}
             onPress={() => {
               setFlash(
                 flash === Camera.Constants.FlashMode.off
@@ -51,7 +51,7 @@ const Scanner = ({ navigation, route }) => {
                   : Camera.Constants.FlashMode.off
               );
             }}>
-              <MaterialCommunityIcons name="flashlight" size={24} color="black" />
+              <MaterialCommunityIcons name="flashlight" size={24} color={settings.darkEnabled ? "white" : "black"} />
           </TouchableOpacity>
         </View>
 
