@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
+
+var { height, phoneWidth } = Dimensions.get('window');
 
 // Global stylesheet for all pages.
 // Only add styles here - do not separate out in page files.
@@ -12,10 +15,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     titleTextLarge: {
+        fontFamily: "Avenir",
         fontSize: 40,
         fontWeight: "bold"
     },
     titleText: {
+        fontFamily: "Avenir",
         fontSize: 35,
         fontWeight: "bold"
     },
@@ -29,6 +34,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     itemName: {
+        fontFamily: "Avenir",
         marginVertical: 10,
         fontWeight: "bold",
         color: "#2F2F2F",
@@ -37,6 +43,7 @@ const styles = StyleSheet.create({
         fontWeight: "200",
     },
     itemNameLarge: {
+        fontFamily: "Avenir",
         marginVertical: 10,
         fontWeight: "bold",
         color: "#2F2F2F",
@@ -51,24 +58,29 @@ const styles = StyleSheet.create({
         top: 25,
     },
     h1Large: {
+        fontFamily: "Avenir",
         marginTop: 20,
         fontSize: 30,
         color: "#2F2F2F",
         fontWeight: "500",
     },
     h2Large: {
+        fontFamily: "Avenir",
         marginTop: 20,
         fontSize: 20,
         color: "#2F2F2F",
         fontWeight: "500",
     },
     h1: {
+        fontFamily: "Avenir",
         marginTop: 20,
         fontSize: 25,
         color: "#2F2F2F",
         fontWeight: "500",
+        
     },
     h2: {
+        fontFamily: "Avenir",
         marginTop: 20,
         fontSize: 15,
         color: "#2F2F2F",
@@ -84,12 +96,14 @@ const styles = StyleSheet.create({
         height: 30,
     },
     recText: {
+        fontFamily: "Avenir",
         fontSize: 15,
         lineHeight: 21,
         fontWeight: 'bold',
         letterSpacing: 0.25,
     },
     recTextLarge: {
+        fontFamily: "Avenir",
         fontSize: 20,
         lineHeight: 21,
         fontWeight: 'bold',
@@ -110,14 +124,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     titleTextLarge: {
+        fontFamily: "Avenir",
         fontSize: 40,
         fontWeight: "bold"
     },
     titleText: {
+        fontFamily: "Avenir",
         fontSize: 35,
         fontWeight: "bold"
     },
     textLarge: {
+        fontFamily: "Avenir",
         fontSize: 20,
         lineHeight: 21,
         fontWeight: 'bold',
@@ -125,6 +142,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     text: {
+        fontFamily: "Avenir",
         fontSize: 15,
         lineHeight: 21,
         fontWeight: 'bold',
@@ -156,10 +174,41 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: "#fff",
         elevation: 3,
-        shadowOffset: { width: 1, heigh: 1 },
+        shadowOffset: { width: 1, height: 1 },
         width: 325,
         padding: 25
     },
+    settingsContainer: {
+        flex: 1,
+        backgroundColor: '#F4F9FA',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    settingsElement: {
+        flexDirection: 'row',
+        paddingBottom: 20,
+        borderBottomColor: '#DBDBDB',
+        borderBottomWidth: 1,
+    },
+    settingsText: {
+        fontFamily: "Avenir",
+        marginTop: 20,
+        fontSize: 25,
+        color: "#2F2F2F",
+        fontWeight: "300",
+        width: 240
+    },
+    settingsTextLarge: {
+        fontFamily: "Avenir",
+        marginTop: 20,
+        fontSize: 30,
+        color: "#2F2F2F",
+        fontWeight: "300",
+        width: 240
+    },
+    settingsToggle: {
+        marginTop: 20,
+    }
 });
 
 module.exports = styles;

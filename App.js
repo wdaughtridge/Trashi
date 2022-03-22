@@ -84,7 +84,7 @@ const App = () => {
               }
             },
             tabBarInactiveTintColor: 'gray',
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: '#45B972',
           })}
         >
           <Tab.Screen name="Scan" component={ScannerStackScreen} />
