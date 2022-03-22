@@ -14,7 +14,7 @@ const Settings = ({ navigation }) => {
         <View style={styles.settingsContainer}>
             <Text style={settings.largeEnabled ? styles.titleTextLarge : styles.titleText}>Settings</Text> 
                 <Text style={settings.largeEnabled ? styles.h1Large : styles.h1}>Location: </Text>
-                <Text style={settings.largeEnabled ? styles.h2Large : styles.h2}>Washington DC</Text>
+                <Text style={settings.largeEnabled ? styles.h2Large : styles.h2}>Washington, DC</Text>
                 <View style={styles.settingsElement}>
                     <Text style={settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText}>Sound </Text>
                     <Switch

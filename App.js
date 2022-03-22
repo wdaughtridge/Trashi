@@ -19,6 +19,7 @@ Amplify.configure(config)
 import Results from './Results';
 import Scanner from './Scanner';
 import Settings from './Settings';
+import Progress from './Progress';
 import AppContext from "./AppContext";
 
 function ScannerStackScreen() {
@@ -66,9 +67,7 @@ const App = () => {
               if (route.name === 'Scan') {
                 return (
                   <Ionicons
-                    name={
-                      'home'
-                    }
+                    name={'barcode'}
                     size={size}
                     color={color}
                   />
@@ -81,13 +80,23 @@ const App = () => {
                     color={color}
                   />
                 );
+              }else if (route.name === 'Statistics') {
+                return (
+                  <Ionicons
+                    name={'bar-chart'}
+                    size={size}
+                    color={color}
+                  />
+                );
               }
             },
             tabBarInactiveTintColor: 'gray',
             tabBarActiveTintColor: '#45B972',
           })}
         >
+          
           <Tab.Screen name="Scan" component={ScannerStackScreen} />
+          <Tab.Screen name="Statistics" component={Progress} />
           <Tab.Screen name="Settings" component={Settings} />
         </Tab.Navigator>
       </NavigationContainer>

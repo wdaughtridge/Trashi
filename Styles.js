@@ -109,6 +109,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         letterSpacing: 0.25,
     },
+    scanContainer: {
+        flex: 1,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+    },
+    scanContent: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -119,9 +133,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignItems: 'flex-end',
     },
     titleTextLarge: {
         fontFamily: "Avenir",
@@ -161,10 +173,28 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 4,
+        padding: 20,
+        backgroundColor: "black",
+        alignItems: 'flex-end',
+    },
+    flashlightButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 12,
+        marginVertical: 10,
+        marginRight: 10,
+        borderRadius: 100,
+        elevation: 3,
+        backgroundColor: '#fff',
+        shadowColor: '#E0DFDF',
+        shadowOffset: {width: 0, height: 3},
+        shadowOpacity: 1,
+        shadowRadius: 0,
     },
     rectangle: {
-        width: '75%',
-        height: 125,
+        width: '100%',
+        height: 150,
         borderColor: 'black',
         borderWidth: 5,
         borderRadius: 5,

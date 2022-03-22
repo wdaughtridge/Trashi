@@ -6,6 +6,10 @@ import { Camera } from 'expo-camera';
 import AppContext from './AppContext';
 import styles from './Styles';
 
+// Icons
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
 const Scanner = ({ navigation, route }) => {
   // State for radio buttons.
   const settings = useContext(AppContext);
@@ -35,14 +39,28 @@ const Scanner = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.scanContainer}>
       <Camera style={styles.camera} type={type} flashMode={flash} onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}>
-        <View style={'flex: 1'}>
-          {/* <View style={styles.rectangle} /> */}
-          {scanned && <Pressable style={styles.button} onPress={() => setScanned(false)}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Tap to Scan Again</Text></Pressable>}
+        <View style={styles.butttonContainer}>
+          <TouchableOpacity
+            style={styles.flashlightButton}
+            onPress={() => {
+              setFlash(
+                flash === Camera.Constants.FlashMode.off
+                  ? Camera.Constants.FlashMode.torch
+                  : Camera.Constants.FlashMode.off
+              );
+            }}>
+              <MaterialCommunityIcons name="flashlight" size={24} color="black" />
+          </TouchableOpacity>
         </View>
-        {!scanned && <View style={styles.rectangle} />}
+
+        <View style={styles.scanContent}>
+          {scanned && <Pressable style={styles.button} onPress={() => setScanned(false)}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Tap to Scan Again</Text></Pressable>}
+          {!scanned && <View style={styles.rectangle} />}
+        </View>
       </Camera>
+      {/*
       <View style={styles.butttonContainer}>
         <TouchableOpacity
           style={styles.button}
@@ -67,6 +85,7 @@ const Scanner = ({ navigation, route }) => {
           <Text style={settings.largeEnabled ? styles.textLarge : styles.text}> Flash </Text>
         </TouchableOpacity>
       </View>
+        */}
     </View>
   );
 };
