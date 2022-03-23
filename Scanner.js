@@ -12,7 +12,8 @@ const Scanner = ({ navigation, route }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-  const [scanned, setScanned] = useState(false);
+  const [scanned, setScanned] = useState(true);
+  const [message, displayMessage] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -30,6 +31,8 @@ const Scanner = ({ navigation, route }) => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+    displayMessage(false);
+    setFlash(Camera.Constants.FlashMode.off);
     console.log(data);
     navigation.navigate('Results', { upc: data });
   };
@@ -37,11 +40,16 @@ const Scanner = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <Camera style={styles.camera} type={type} flashMode={flash} onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}>
-        <View style={'flex: 1'}>
-          {/* <View style={styles.rectangle} /> */}
-          {scanned && <Pressable style={styles.button} onPress={() => setScanned(false)}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Tap to Scan Again</Text></Pressable>}
-        </View>
-        {!scanned && <View style={styles.rectangle} />}
+          <View style={'flex: 1'}>
+            {scanned && <Pressable style={styles.button} onPress={() => {
+              setScanned(false);
+              setTimeout(() => {displayMessage(true)}, 20000);
+            }}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Tap to Scan</Text></Pressable>}
+            {message && <Pressable style={styles.button} onPress={() => {
+              displayMessage(false);
+            }}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Make sure to align barcode with focus area below. Tap to dismiss.</Text></Pressable>}
+          </View>
+          {!scanned && <View style={styles.rectangle} />}
       </Camera>
       <View style={styles.butttonContainer}>
         <TouchableOpacity

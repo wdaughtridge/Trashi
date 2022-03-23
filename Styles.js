@@ -131,6 +131,17 @@ const styles = StyleSheet.create({
         letterSpacing: 0.25,
         color: 'white',
     },
+    textBlack: {
+        fontSize: 15,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'black',
+    },
+    wrapperCustom: {
+        borderRadius: 8,
+        padding: 6
+    },
     button: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -160,6 +171,16 @@ const styles = StyleSheet.create({
         width: 325,
         padding: 25
     },
+    stats: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        marginVertical: 10,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'white',
+    }
 });
 
 module.exports = styles;
