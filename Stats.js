@@ -63,6 +63,7 @@ const Stats = ({ navigation }) => {
             { name: 'Glass Bottles', population: glassBottles, color: 'green', legendFontColor: '#7F7F7F', legendFontSize: 10 },
             { name: 'Metals', population: metals, color: 'darkgreen', legendFontColor: '#7F7F7F', legendFontSize: 10 },
         ]
+
         const chartConfig = {
             backgroundGradientFrom: '#1E2923',
             backgroundGradientTo: '#08130D',
@@ -70,7 +71,7 @@ const Stats = ({ navigation }) => {
         }
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <PieChart
                     data={data}
                     width={Dimensions.get('window').width}

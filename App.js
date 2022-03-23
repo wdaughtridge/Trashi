@@ -125,9 +125,36 @@ const App = () => {
           })}
         >
           
-          <Tab.Screen name="Scan" component={ScannerStackScreen} />
-          <Tab.Screen name="Stats" component={Stats} />
-          <Tab.Screen name="Settings" component={Settings} />
+          <Tab.Screen 
+            name="Scan" 
+            component={ScannerStackScreen} 
+            options={settings.darkEnabled ? {
+                headerStyle: {
+                    backgroundColor: '#16131D',
+                },
+                headerTintColor: '#fff',
+            } : {}}
+          />
+          <Tab.Screen 
+            name="Stats" 
+            component={Stats} 
+            options={settings.darkEnabled ? {
+              headerStyle: {
+                backgroundColor: '#16131D',
+              },
+              headerTintColor: '#fff',
+            } : {}} 
+          />
+          <Tab.Screen 
+            name="Settings" 
+            component={Settings} 
+            options={settings.darkEnabled ? {
+              headerStyle: {
+                  backgroundColor: '#16131D',
+              },
+              headerTintColor: '#fff',
+            } : {}}  
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </AppContext.Provider>

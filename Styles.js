@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         elevation: 3,
         backgroundColor: 'white',
-    }
+    },
 });
 
 module.exports = styles;

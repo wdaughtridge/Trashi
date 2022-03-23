@@ -23,15 +23,15 @@ const Results = ({ navigation, route }) => {
 
     const [sound, setSound] = React.useState();
 
-    async function playSound() {
-        console.log('Loading Sound');
-        const { sound } = await Audio.Sound.createAsync(
-        require('./assets/chime.mp3')
-        );
-        setSound(sound);
+    // async function playSound() {
+        // console.log('Loading Sound');
+        // const { sound } = await Audio.Sound.createAsync(
+        // require('./assets/chime.mp3')
+        // );
+        // setSound(sound);
 
-        console.log('Playing Sound');
-        await sound.playAsync(); }
+        // console.log('Playing Sound');
+        // await sound.playAsync(); }
 
     React.useEffect(() => {
         return sound
@@ -138,7 +138,7 @@ const Results = ({ navigation, route }) => {
 
     if ((item === null || regulation === null || Object.keys(regulation).length === 0 || Object.keys(regulation).length === 0) && success === true) {
         if (settings.soundEnabled) {
-            playSound();
+            // playSound();
         }
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
@@ -151,7 +151,7 @@ const Results = ({ navigation, route }) => {
 
     if (item !== null && Object.keys(item).length !== 0 && regulation !== null && Object.keys(regulation).length !== 0) {
         if (settings.soundEnabled) {
-            playSound();
+            // playSound();
         } else {
             console.log("fuck");
         }

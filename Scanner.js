@@ -17,7 +17,8 @@ const Scanner = ({ navigation, route }) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const [scanned, setScanned] = useState(true);
-  const [message, displayMessage] = useState(false);
+  const [message, setMessage] = useState(0);
+  const messages = ["Hold phone over a barcode", "Make sure it's aligned in the focus box above", "If it's dark, use the flash in top-right corner"];
 
   useEffect(() => {
     (async () => {
@@ -42,12 +43,13 @@ const Scanner = ({ navigation, route }) => {
   };
 
   const getScannerInstructions = () => {
+    setTimeout(() => {setMessage((message + 1) % 3)}, 10000);
     return(
       <View>
         {/*<Image style={styles.scanImage} source={require("./assets/holdingphone.png")}/>*/}
         <View style={styles.rectangle} />
         <View style={styles.borderRadius}>
-          <Text style={[settings.largeEnabled ? styles.scannerInstructionTextLarge : styles.scannerInstructionText, {alignItems:'center', justifyContent: "center", marginTop:20}]}>Hold phone over a barcode</Text>
+          <Text style={[settings.largeEnabled ? styles.scannerInstructionTextLarge : styles.scannerInstructionText, {alignItems:'center', justifyContent: "center", marginTop:20}]}>{messages[message]}</Text>
         </View>
         
       </View>
@@ -72,7 +74,6 @@ const Scanner = ({ navigation, route }) => {
         </View>
 
         <View style={styles.scanContent}>
-
           {scanned && <Pressable style={styles.button} onPress={() => setScanned(false)}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Tap to Scan Again</Text></Pressable>}
           {!scanned && getScannerInstructions()}
         </View>
@@ -84,34 +85,8 @@ const Scanner = ({ navigation, route }) => {
             {message && <Pressable style={styles.button} onPress={() => {
               displayMessage(false);
             }}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Make sure to align barcode with focus area below. Tap to dismiss.</Text></Pressable>}
-          </View>
-          {!scanned && <View style={styles.rectangle} />}
+          </View>*/}
       </Camera>
-      <View style={styles.butttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setType(
-              type === Camera.Constants.Type.back
-                ? Camera.Constants.Type.front
-                : Camera.Constants.Type.back
-            );
-          }}>
-          <Text style={settings.largeEnabled ? styles.textLarge : styles.text}> Flip </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setFlash(
-              flash === Camera.Constants.FlashMode.off
-                ? Camera.Constants.FlashMode.torch
-                : Camera.Constants.FlashMode.off
-            );
-          }}>
-          <Text style={settings.largeEnabled ? styles.textLarge : styles.text}> Flash </Text>
-        </TouchableOpacity>
-      </View>
-        */}
     </View>
   );
 };
