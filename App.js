@@ -19,8 +19,12 @@ Amplify.configure(config)
 import Results from './Results';
 import Scanner from './Scanner';
 import Settings from './Settings';
-import Progress from './Progress';
+import Stats from './Stats';
 import AppContext from "./AppContext";
+
+import * as SecureStore from 'expo-secure-store';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
 function ScannerStackScreen() {
   return (
@@ -29,6 +33,16 @@ function ScannerStackScreen() {
       <Stack.Screen name="Results" component={Results} />
     </Stack.Navigator>
   );
+}
+
+async function checkForUUID() {
+  let result = await SecureStore.getItemAsync('secure_deviceid');
+  if (result === null) {
+    let uuid = uuidv4();
+    await SecureStore.setItemAsync('secure_deviceid', JSON.stringify(uuid));
+    let fetchUUID = await SecureStore.getItemAsync('secure_deviceid');
+    console.log(fetchUUID)
+  }
 }
 
 const App = () => {
@@ -58,11 +72,13 @@ const App = () => {
     largeToggleSwitch,
   };
 
-if (settings.darkEnabled) {
-  var darkText = "#fff"
-} else {
-  var darkText = "#2F2F2F"
-}
+  if (settings.darkEnabled) {
+    var darkText = "#fff"
+  } else {
+    var darkText = "#2F2F2F"
+  }
+  
+  checkForUUID();
 
   return (
     <AppContext.Provider value={settings}>
@@ -74,6 +90,14 @@ if (settings.darkEnabled) {
                 return (
                   <Ionicons
                     name={'barcode'}
+                    size={size}
+                    color={color}
+                  />
+                );
+              } else if (route.name === 'Stats') {
+                return (
+                  <Ionicons
+                    name={'ios-analytics-outline'}
                     size={size}
                     color={color}
                   />
@@ -102,7 +126,7 @@ if (settings.darkEnabled) {
         >
           
           <Tab.Screen name="Scan" component={ScannerStackScreen} />
-          <Tab.Screen name="Statistics" component={Progress} />
+          <Tab.Screen name="Stats" component={Stats} />
           <Tab.Screen name="Settings" component={Settings} />
         </Tab.Navigator>
       </NavigationContainer>

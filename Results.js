@@ -12,6 +12,8 @@ import * as queries from './src/graphql/queries';
 import AppContext from './AppContext';
 import styles from './Styles';
 
+import * as SecureStore from 'expo-secure-store';
+
 const Results = ({ navigation, route }) => {
     const settings = useContext(AppContext);
     const [item, setItem] = useState([]);
@@ -44,11 +46,13 @@ const Results = ({ navigation, route }) => {
             const itemData = await API.graphql({ query: queries.getItem, variables: { id: data } });
             if (itemData.data.getItem !== null) {
                 setItem(itemData.data.getItem);
+                storeScan(itemData.data.getItem);
                 fetchRegulation(itemData.data.getItem.material, 'Washington DC');
+                logSuccessQuery();
             } else {
                 setItem(null);
                 setSuccess(false);
-                logQuery();
+                logFailedQuery();
             }
         } catch (err) {
             setItem(null);
@@ -57,13 +61,40 @@ const Results = ({ navigation, route }) => {
         }
     }
 
-    async function logQuery() {
+    async function logSuccessQuery() {
+        try {
+            const log = { upc: upc, region: 'Washington DC', success: true }
+            console.log('LOG: SUCCESSFUL REQUEST', log);
+            await API.graphql(graphqlOperation(createLogItem, { input: log }))
+        } catch (err) {
+            console.log('error creating log:', err)
+        }
+    }
+
+    async function logFailedQuery() {
         try {
             const log = { upc: upc, region: 'Washington DC', success: false }
             console.log('LOG: FAILED REQUEST', log);
             await API.graphql(graphqlOperation(createLogItem, { input: log }))
         } catch (err) {
             console.log('error creating log:', err)
+        }
+    }
+
+    async function storeScan(item) {
+        key = item.material;
+        key = key.replace(/ /g,"_");
+        let count = await SecureStore.getItemAsync(key);
+        console.log(key);
+        if (count === null) {
+            count = 0;
+            await SecureStore.setItemAsync(key, `${parseInt(count) + 1}`);
+            let newCount = await SecureStore.getItemAsync(key);
+            console.log(newCount);
+        } else {
+            await SecureStore.setItemAsync(key, `${parseInt(count) + 1}`);
+            let newCount = await SecureStore.getItemAsync(key);
+            console.log(newCount);
         }
     }
 
