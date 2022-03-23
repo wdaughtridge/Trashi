@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ScrollView, ActivityIndicator, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import RecommendationsCard from "./RecommendationsCard";
+import { Audio } from 'expo-av';
 
 // Amplify
 import { API, graphqlOperation } from 'aws-amplify';
@@ -17,6 +18,26 @@ const Results = ({ navigation, route }) => {
     const [regulation, setRegulation] = useState([]);
     const { upc } = route.params;
     const [success, setSuccess] = useState(true);
+
+    const [sound, setSound] = React.useState();
+
+    async function playSound() {
+        console.log('Loading Sound');
+        const { sound } = await Audio.Sound.createAsync(
+        require('./assets/chime.mp3')
+        );
+        setSound(sound);
+
+        console.log('Playing Sound');
+        await sound.playAsync(); }
+
+    React.useEffect(() => {
+        return sound
+        ? () => {
+            console.log('Unloading Sound');
+            sound.unloadAsync(); }
+        : undefined;
+    }, [sound]);
 
     async function fetchItem(data) {
         try {
@@ -85,6 +106,7 @@ const Results = ({ navigation, route }) => {
     }, []);
 
     if ((item === null || regulation === null || Object.keys(regulation).length === 0 || Object.keys(regulation).length === 0) && success === true) {
+        playSound();
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <View style={styles.contentArea}>
@@ -95,6 +117,7 @@ const Results = ({ navigation, route }) => {
     }
 
     if (item !== null && Object.keys(item).length !== 0 && regulation !== null && Object.keys(regulation).length !== 0) {
+        playSound();
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <ScrollView style={styles.contentArea}>
