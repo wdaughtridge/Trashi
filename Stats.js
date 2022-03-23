@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
-import { View, Switch, Pressable, Dimensions, ActivityIndicator, SafeAreaView } from 'react-native';
+import { View, Dimensions, ActivityIndicator, SafeAreaView } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
+import { useFocusEffect } from '@react-navigation/native';
 
 // Utility
 import AppContext from './AppContext';
@@ -13,19 +14,6 @@ const Stats = ({ navigation }) => {
     const [plasticBottles, setPlasticBottles] = useState(null);
     const [glassBottles, setGlassBottles] = useState(null);
     const [metals, setMetals] = useState(null);
-
-    function getPieChartData(data) {
-        return data.map((item, index) => {
-            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
-    
-            return {
-                key: index,
-                value: item,
-                svg: { fill: randomColor },
-                arc: { cornerRadius: 5 },
-            }
-        })
-    }
 
     async function getStats() {
         let plasticBottlesCount = await SecureStore.getItemAsync("Plastic_Bottle");
@@ -45,9 +33,18 @@ const Stats = ({ navigation }) => {
         setMetals(parseInt(metalsCount));
     }
 
-    if (plasticBottles === null || glassBottles === null || metals === null) {
-        getStats();
+    useFocusEffect(
+        React.useCallback(() => {
+            getStats();
+            return () => {
+                
+            };
+        }, [])
+    );
 
+    getStats();
+
+    if (plasticBottles === null || glassBottles === null || metals === null) {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.contentArea}>
@@ -63,6 +60,7 @@ const Stats = ({ navigation }) => {
             { name: 'Glass Bottles', population: glassBottles, color: 'green', legendFontColor: '#7F7F7F', legendFontSize: 10 },
             { name: 'Metals', population: metals, color: 'darkgreen', legendFontColor: '#7F7F7F', legendFontSize: 10 },
         ]
+
         const chartConfig = {
             backgroundGradientFrom: '#1E2923',
             backgroundGradientTo: '#08130D',
@@ -70,7 +68,7 @@ const Stats = ({ navigation }) => {
         }
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <PieChart
                     data={data}
                     width={Dimensions.get('window').width}

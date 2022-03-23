@@ -35,6 +35,13 @@ function ScannerStackScreen() {
   );
 }
 
+// async function getSettings() {
+//   let sound = await SecureStore.getItemAsync('soundIsEnabled') === 'true' ? true : false;
+//   let read = await SecureStore.getItemAsync('readIsEnabled') === 'true' ? true : false; 
+//   let dark = await SecureStore.getItemAsync('darkIsEnabled') === 'true' ? true : false;
+//   let large = await SecureStore.getItemAsync('largeIsEnabled') === 'true' ? true : false;
+// }
+
 async function checkForUUID() {
   let result = await SecureStore.getItemAsync('secure_deviceid');
   if (result === null) {
@@ -49,6 +56,7 @@ const App = () => {
   // Global settings for all pages.
   // Keeps track of set accessibility settings in a session. 
   // TODO: make data persistent.
+
   const [soundIsEnabled, setSoundIsEnabled] = useState(false);
   const soundToggleSwitch = () => setSoundIsEnabled(previousState => !previousState);
 
@@ -72,6 +80,25 @@ const App = () => {
     largeToggleSwitch,
   };
 
+  if (settings.darkEnabled) {
+    var darkText = "#fff"
+  } else {
+    var darkText = "#2F2F2F"
+  }
+
+  // async function getSettings() {
+  //   let sound = await SecureStore.getItemAsync('soundIsEnabled') === 'true' ? true : false;
+  //   let read = await SecureStore.getItemAsync('readIsEnabled') === 'true' ? true : false; 
+  //   let dark = await SecureStore.getItemAsync('darkIsEnabled') === 'true' ? true : false;
+  //   let large = await SecureStore.getItemAsync('largeIsEnabled') === 'true' ? true : false;
+
+  //   setSoundIsEnabled(sound);
+  //   setReadIsEnabled(read);
+  //   setDarkIsEnabled(dark);
+  //   setLargeIsEnabled(large);
+  // }
+  
+  // getSettings();
   checkForUUID();
 
   return (
@@ -83,9 +110,7 @@ const App = () => {
               if (route.name === 'Scan') {
                 return (
                   <Ionicons
-                    name={
-                      'home'
-                    }
+                    name={'barcode'}
                     size={size}
                     color={color}
                   />
@@ -106,15 +131,51 @@ const App = () => {
                     color={color}
                   />
                 );
+              }else if (route.name === 'Statistics') {
+                return (
+                  <Ionicons
+                    name={'bar-chart'}
+                    size={size}
+                    color={color}
+                  />
+                );
               }
             },
             tabBarInactiveTintColor: 'gray',
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: '#45B972',
           })}
         >
-          <Tab.Screen name="Scan" component={ScannerStackScreen} />
-          <Tab.Screen name="Stats" component={Stats} />
-          <Tab.Screen name="Settings" component={Settings} />
+          
+          <Tab.Screen 
+            name="Scan" 
+            component={ScannerStackScreen} 
+            options={settings.darkEnabled ? {
+                headerStyle: {
+                    backgroundColor: '#16131D',
+                },
+                headerTintColor: '#fff',
+            } : {}}
+          />
+          <Tab.Screen 
+            name="Stats" 
+            component={Stats} 
+            options={settings.darkEnabled ? {
+              headerStyle: {
+                backgroundColor: '#16131D',
+              },
+              headerTintColor: '#fff',
+            } : {}} 
+          />
+          <Tab.Screen 
+            name="Settings" 
+            component={Settings} 
+            options={settings.darkEnabled ? {
+              headerStyle: {
+                  backgroundColor: '#16131D',
+              },
+              headerTintColor: '#fff',
+            } : {}}  
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </AppContext.Provider>
