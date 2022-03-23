@@ -14,6 +14,10 @@ import styles from './Styles';
 
 import * as SecureStore from 'expo-secure-store';
 
+// Icons
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
+
 const Results = ({ navigation, route }) => {
     const settings = useContext(AppContext);
     const [item, setItem] = useState([]);
@@ -23,15 +27,15 @@ const Results = ({ navigation, route }) => {
 
     const [sound, setSound] = React.useState();
 
-    // async function playSound() {
-        // console.log('Loading Sound');
-        // const { sound } = await Audio.Sound.createAsync(
-        // require('./assets/chime.mp3')
-        // );
-        // setSound(sound);
+    async function playSound() {
+        console.log('Loading Sound');
+        const { sound } = await Audio.Sound.createAsync(
+        require('./assets/ding.wav')
+        );
+        setSound(sound);
 
-        // console.log('Playing Sound');
-        // await sound.playAsync(); }
+        console.log('Playing Sound');
+        await sound.playAsync(); }
 
     React.useEffect(() => {
         return sound
@@ -136,9 +140,16 @@ const Results = ({ navigation, route }) => {
         fetchItem(upc);
     }, []);
 
+    {/*function getRecs(){
+        var recArr = regulation.suggestion.split(".");
+        console.log(recArr[0]);
+        console.log(recArr[1]);
+    }
+    getRecs();*/}
+
     if ((item === null || regulation === null || Object.keys(regulation).length === 0 || Object.keys(regulation).length === 0) && success === true) {
         if (settings.soundEnabled) {
-            // playSound();
+             playSound();
         }
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
@@ -151,36 +162,43 @@ const Results = ({ navigation, route }) => {
 
     if (item !== null && Object.keys(item).length !== 0 && regulation !== null && Object.keys(regulation).length !== 0) {
         if (settings.soundEnabled) {
-            // playSound();
-        } else {
-            console.log("fuck");
+             playSound();
         }
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <ScrollView style={styles.contentArea}>
+                    <View style={styles.resultsTitle}>
                     <Text style={[settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         Results
                     </Text>
+                    <Text style={[settings.largeEnabled ? styles.regionTextLarge : styles.regionText, settings.darkEnabled ? styles.textDark : styles.textLight]}>
+                        Region: {regulation.region}
+                    </Text>
+                    </View>
 
                     <View style={[styles.card, settings.darkEnabled ? styles.cardBackgroundDark : styles.cardBackgroundLight]}>
                         <View style={styles.cardContent}>
-                            <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
+                            {/*<Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                                 Name: {item.name}
-                            </Text>
+                            </Text>*/}
 
-                            <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
+                            <Text style={[settings.largeEnabled ? styles.recTextLarge : styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                                 Material: {item.material}
                             </Text>
 
-                            <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
+                            <Text style={[settings.largeEnabled ? styles.recTextLarge : styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                                 Description: {item.description}
                             </Text>
 
-                            <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
+                            {/*<Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                                 Region: {regulation.region}
-                            </Text>
+                            </Text>*/}
                         </View>
                     </View>
+                    <Text style={[settings.largeEnabled ? styles.resultsItemNameLarge : styles.resultsItemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
+                        {item.name}
+                    </Text>
+                    <View style={styles.resultsDivider}></View>
                     {/*<RecommendationsCard>
                         <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                             Name: {item.name}
@@ -199,17 +217,26 @@ const Results = ({ navigation, route }) => {
                         </Text>
                     </RecommendationsCard> */}
 
+                    {/*<View style={[styles.recContainer, styles.tipContainer]}>        
+                        <MaterialCommunityIcons style={styles.recIcon}name="information" size={20} color="#45B972" />
+                        <Text style={[settings.largeEnabled ? styles.regionTextLarge : styles.regionText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Try using a reusable item next time!</Text>
+                    </View>*/}
+
                     <Text style={[styles.h1, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         Recommendations
                     </Text>
                     <View style={[styles.card, settings.darkEnabled ? styles.cardBackgroundDark : styles.cardBackgroundLight]}>
                         <View style={styles.cardContent}>
                             <View style={styles.recContainer}>
+                                
+                                <MaterialCommunityIcons style={styles.recIcon}name="recycle-variant" size={24} color={settings.darkEnabled ? "white" : "black"} />
                                 {/* <Image style={styles.recIcon} source={require('./assets/recycle.png')}/> */}
-                                <Text style={[styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>{regulation.suggestion}</Text>
+                                
+                                <Text style={[settings.largeEnabled ? styles.recTextLarge : styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>{regulation.suggestion}</Text>
                             </View>
                         </View>
                     </View>
+
                     {/*<RecommendationsCard>
                         <View style={styles.recContainer}>
                             <Image style={styles.recIcon} source={require('./assets/recycle.png')}/> 
@@ -223,7 +250,7 @@ const Results = ({ navigation, route }) => {
 
                     <View style={[styles.card, settings.darkEnabled ? styles.cardBackgroundDark : styles.cardBackgroundLight]}>
                         <View style={styles.cardContent}>
-                            <Text style={[styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Solid Waste Management Administration, Mayor's List, Sec II, I, c</Text>
+                            <Text style={[settings.largeEnabled ? styles.recTextLarge : styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Solid Waste Management Administration, Mayor's List, Sec II, I, c</Text>
                         </View>
                     </View>
                     {/*<RecommendationsCard>

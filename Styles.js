@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         fontWeight: "bold",
         color: "#2F2F2F",
-        fontSize: 25,
+        fontSize: 20,
         // fontFamily: "arial",
         fontWeight: "200",
     },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         fontWeight: "bold",
         color: "#2F2F2F",
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: "200",
     },
     x: {
@@ -146,6 +146,20 @@ const styles = StyleSheet.create({
         fontSize: 20,
         lineHeight: 21,
         fontWeight: 'bold',
+        letterSpacing: 0.25,
+    },
+    regionText: {
+        fontFamily: "Avenir",
+        fontSize: 13,
+        lineHeight: 21,
+        fontWeight: 'normal',
+        letterSpacing: 0.25,
+    },
+    regionTextLarge: {
+        fontFamily: "Avenir",
+        fontSize: 18,
+        lineHeight: 21,
+        fontWeight: 'normal',
         letterSpacing: 0.25,
     },
     scanContainer: {
@@ -324,6 +338,39 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         elevation: 3,
         backgroundColor: 'white',
+    },
+    resultsTitle: {
+        flex: 1,
+        alignItems: 'center',
+        textAlign: 'center',
+    },  
+    resultsDivider: {
+        borderBottomColor: "#45B972",
+        borderBottomWidth: 5,
+        paddingTop: 10,
+        width: 40
+    },
+    resultsItemName: {
+        paddingTop: 10,
+        fontFamily: 'Avenir',
+        fontSize: 30,
+        fontWeight:'normal',
+    },
+    resultsItemNameLarge: {
+        paddingTop: 10,
+        fontFamily: 'Avenir',
+        fontSize: 35,
+        fontWeight:'normal',
+    },
+    recIcon: {
+        marginRight: 20,
+    },
+    tipContainer: {
+        borderColor: "#45B972",
+        borderWidth: 1,
+        borderRadius: 5,
+        padding: 15,
+        marginTop: 20
     },
 });
 
