@@ -36,7 +36,6 @@ const Scanner = ({ navigation, route }) => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    displayMessage(false);
     setFlash(Camera.Constants.FlashMode.off);
     console.log(data);
     navigation.navigate('Results', { upc: data });
