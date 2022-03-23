@@ -35,6 +35,13 @@ function ScannerStackScreen() {
   );
 }
 
+// async function getSettings() {
+//   let sound = await SecureStore.getItemAsync('soundIsEnabled') === 'true' ? true : false;
+//   let read = await SecureStore.getItemAsync('readIsEnabled') === 'true' ? true : false; 
+//   let dark = await SecureStore.getItemAsync('darkIsEnabled') === 'true' ? true : false;
+//   let large = await SecureStore.getItemAsync('largeIsEnabled') === 'true' ? true : false;
+// }
+
 async function checkForUUID() {
   let result = await SecureStore.getItemAsync('secure_deviceid');
   if (result === null) {
@@ -49,6 +56,7 @@ const App = () => {
   // Global settings for all pages.
   // Keeps track of set accessibility settings in a session. 
   // TODO: make data persistent.
+
   const [soundIsEnabled, setSoundIsEnabled] = useState(false);
   const soundToggleSwitch = () => setSoundIsEnabled(previousState => !previousState);
 
@@ -77,7 +85,20 @@ const App = () => {
   } else {
     var darkText = "#2F2F2F"
   }
+
+  // async function getSettings() {
+  //   let sound = await SecureStore.getItemAsync('soundIsEnabled') === 'true' ? true : false;
+  //   let read = await SecureStore.getItemAsync('readIsEnabled') === 'true' ? true : false; 
+  //   let dark = await SecureStore.getItemAsync('darkIsEnabled') === 'true' ? true : false;
+  //   let large = await SecureStore.getItemAsync('largeIsEnabled') === 'true' ? true : false;
+
+  //   setSoundIsEnabled(sound);
+  //   setReadIsEnabled(read);
+  //   setDarkIsEnabled(dark);
+  //   setLargeIsEnabled(large);
+  // }
   
+  // getSettings();
   checkForUUID();
 
   return (
