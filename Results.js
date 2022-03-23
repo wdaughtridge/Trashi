@@ -106,7 +106,9 @@ const Results = ({ navigation, route }) => {
     }, []);
 
     if ((item === null || regulation === null || Object.keys(regulation).length === 0 || Object.keys(regulation).length === 0) && success === true) {
-        playSound();
+        if (settings.soundEnabled) {
+            playSound();
+        }
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <View style={styles.contentArea}>
@@ -117,7 +119,11 @@ const Results = ({ navigation, route }) => {
     }
 
     if (item !== null && Object.keys(item).length !== 0 && regulation !== null && Object.keys(regulation).length !== 0) {
-        playSound();
+        if (settings.soundEnabled) {
+            playSound();
+        } else {
+            console.log("fuck");
+        }
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <ScrollView style={styles.contentArea}>
