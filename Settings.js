@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { View, Switch, StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import RecommendationsCard from './RecommendationsCard';
+import { useFocusEffect } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
 
 // Utility
 import AppContext from './AppContext';
@@ -10,6 +11,22 @@ import styles from './Styles';
 
 const Settings = ({ navigation }) => {
     const settings = useContext(AppContext);
+
+    // async function storeSettings() {
+    //     await SecureStore.setItemAsync('soundIsEnabled', settings.soundEnabled.toString());
+    //     await SecureStore.setItemAsync('readIsEnabled', settings.readEnabled.toString());
+    //     await SecureStore.setItemAsync('darkIsEnabled', settings.darkEnabled.toString());
+    //     await SecureStore.setItemAsync('largeIsEnabled', settings.largeEnabled.toString());
+    //     console.log('Stored settings.')
+    // }
+
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         return () => {
+    //             storeSettings();
+    //         };
+    //     }, [])
+    // );
 
     return (
         <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
