@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Pressable, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import { Camera } from 'expo-camera';
 
 // Utility
@@ -38,6 +38,19 @@ const Scanner = ({ navigation, route }) => {
     navigation.navigate('Results', { upc: data });
   };
 
+  const getScannerInstructions = () => {
+    return(
+      <View>
+        {/*<Image style={styles.scanImage} source={require("./assets/holdingphone.png")}/>*/}
+        <View style={styles.rectangle} />
+        <View style={styles.borderRadius}>
+          <Text style={[settings.largeEnabled ? styles.scannerInstructionTextLarge : styles.scannerInstructionText, {alignItems:'center', justifyContent: "center", marginTop:20}]}>Hold phone over a barcode</Text>
+        </View>
+        
+      </View>
+    );
+  };
+
   return (
     <View style={styles.scanContainer}>
       <Camera style={styles.camera} type={type} flashMode={flash} onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}>
@@ -56,8 +69,9 @@ const Scanner = ({ navigation, route }) => {
         </View>
 
         <View style={styles.scanContent}>
+
           {scanned && <Pressable style={styles.button} onPress={() => setScanned(false)}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Tap to Scan Again</Text></Pressable>}
-          {!scanned && <View style={styles.rectangle} />}
+          {!scanned && getScannerInstructions()}
         </View>
       </Camera>
       {/*

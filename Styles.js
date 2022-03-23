@@ -160,7 +160,37 @@ const styles = StyleSheet.create({
         height: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+    },
+    scanImage: {
+        alignItems:'center', 
+        justifyContent: "center",
+        marginLeft: 100,
+        width: 80,
+        resizeMode: 'contain',
+    },
+    borderRadius: {
+        borderRadius: 10,
+    },
+    scannerInstructionText: {
+        color: '#fff',
+        fontSize: 20,
+        fontFamily: 'Avenir',
+        backgroundColor: 'rgba(52,52,52,0.7)',
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        borderRadius: 5,
+        overflow: 'hidden'
+    },
+    scannerInstructionTextLarge: {
+        color: '#fff',
+        fontSize: 25,
+        fontFamily: 'Avenir',
+        backgroundColor: 'rgba(52,52,52,0.7)',
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        borderRadius: 5,
+        overflow: 'hidden'
     },
     container: {
         flex: 1,
@@ -232,9 +262,10 @@ const styles = StyleSheet.create({
     rectangle: {
         width: '100%',
         height: 150,
-        borderColor: 'black',
+        borderColor: '#2F2F2F',
         borderWidth: 5,
         borderRadius: 5,
+        marginTop: 0,
     },
     card: {
         marginTop: 10,
