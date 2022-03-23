@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Pressable, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import { Pressable, Text, View, TouchableOpacity, Image} from 'react-native';
 import { Camera } from 'expo-camera';
 
 // Utility
@@ -7,7 +7,6 @@ import AppContext from './AppContext';
 import styles from './Styles';
 
 // Icons
-import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 const Scanner = ({ navigation, route }) => {

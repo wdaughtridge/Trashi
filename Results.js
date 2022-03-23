@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ScrollView, ActivityIndicator, StyleSheet, Text, View, SafeAreaView } from "react-native";
-import RecommendationsCard from "./RecommendationsCard";
+import { ScrollView, ActivityIndicator, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Audio } from 'expo-av';
 
 // Amplify
@@ -89,6 +88,7 @@ const Results = ({ navigation, route }) => {
         }
     }
 
+    // Store scan attempt into phone keychain for persistant storage.
     async function storeScan(item) {
         key = item.material;
         key = key.replace(/ /g,"_");
@@ -176,10 +176,6 @@ const Results = ({ navigation, route }) => {
 
                     <View style={[styles.card, settings.darkEnabled ? styles.cardBackgroundDark : styles.cardBackgroundLight]}>
                         <View style={styles.cardContent}>
-                            {/*<Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
-                                Name: {item.name}
-                            </Text>*/}
-
                             <Text style={[settings.largeEnabled ? styles.recTextLarge : styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                                 Material: {item.material}
                             </Text>
@@ -187,38 +183,12 @@ const Results = ({ navigation, route }) => {
                             <Text style={[settings.largeEnabled ? styles.recTextLarge : styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                                 Description: {item.description}
                             </Text>
-
-                            {/*<Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
-                                Region: {regulation.region}
-                            </Text>*/}
                         </View>
                     </View>
                     <Text style={[settings.largeEnabled ? styles.resultsItemNameLarge : styles.resultsItemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         {item.name}
                     </Text>
                     <View style={styles.resultsDivider}></View>
-                    {/*<RecommendationsCard>
-                        <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
-                            Name: {item.name}
-                        </Text>
-
-                        <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
-                            Material: {item.material}
-                        </Text>
-
-                        <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
-                            Description: {item.description}
-                        </Text>
-
-                        <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
-                            Region: {regulation.region}
-                        </Text>
-                    </RecommendationsCard> */}
-
-                    {/*<View style={[styles.recContainer, styles.tipContainer]}>        
-                        <MaterialCommunityIcons style={styles.recIcon}name="information" size={20} color="#45B972" />
-                        <Text style={[settings.largeEnabled ? styles.regionTextLarge : styles.regionText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Try using a reusable item next time!</Text>
-                    </View>*/}
 
                     <Text style={[styles.h1, settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         Recommendations
@@ -226,21 +196,11 @@ const Results = ({ navigation, route }) => {
                     <View style={[styles.card, settings.darkEnabled ? styles.cardBackgroundDark : styles.cardBackgroundLight]}>
                         <View style={styles.cardContent}>
                             <View style={styles.recContainer}>
-                                
                                 <MaterialCommunityIcons style={styles.recIcon}name="recycle-variant" size={24} color={settings.darkEnabled ? "white" : "black"} />
-                                {/* <Image style={styles.recIcon} source={require('./assets/recycle.png')}/> */}
-                                
                                 <Text style={[settings.largeEnabled ? styles.recTextLarge : styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>{regulation.suggestion}</Text>
                             </View>
                         </View>
                     </View>
-
-                    {/*<RecommendationsCard>
-                        <View style={styles.recContainer}>
-                            <Image style={styles.recIcon} source={require('./assets/recycle.png')}/> 
-                            <Text style={[styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>{regulation.suggestion}</Text>
-                        </View>
-                    </RecommendationsCard>*/}
 
                     <Text style={[styles.h1, , settings.darkEnabled ? styles.textDark : styles.textLight]}>
                         Regulations Citation
@@ -251,9 +211,6 @@ const Results = ({ navigation, route }) => {
                             <Text style={[settings.largeEnabled ? styles.recTextLarge : styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Solid Waste Management Administration, Mayor's List, Sec II, I, c</Text>
                         </View>
                     </View>
-                    {/*<RecommendationsCard>
-                        <Text style={[styles.recText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Solid Waste Management Administration, Mayor's List, Sec II, I, c</Text>
-                    </RecommendationsCard>*/}
                 </ScrollView>
             </SafeAreaView>
         );
@@ -276,14 +233,6 @@ const Results = ({ navigation, route }) => {
                         </Text>
                     </View>
                 </View>
-                {/*<RecommendationsCard>
-                    <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
-                        No item was found in our database matching that barcode.
-                    </Text>
-                    <Text style={[settings.largeEnabled ? styles.itemNameLarge : styles.itemName, settings.darkEnabled ? styles.textDark : styles.textLight]}>
-                        Don't worry though - we have logged your scan and will add the item soon!
-                    </Text>
-                </RecommendationsCard>*/}
             </View>
         </SafeAreaView>
     );

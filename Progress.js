@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import { View, Switch, StyleSheet, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import RecommendationsCard from './RecommendationsCard';
 
 // Utility
 import AppContext from './AppContext';
@@ -13,9 +12,7 @@ const Progress = ({ navigation }) => {
     return (
         <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
             <Text style={[settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>My Progress</Text> 
-            <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Recycled Items This Month</Text>
-
-                
+            <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Recycled Items This Month</Text>        
             <StatusBar style="auto" />
         </View>
     );

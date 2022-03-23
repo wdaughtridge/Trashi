@@ -22,6 +22,7 @@ import Settings from './Settings';
 import Stats from './Stats';
 import AppContext from "./AppContext";
 
+// Utilities
 import * as SecureStore from 'expo-secure-store';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
@@ -79,12 +80,6 @@ const App = () => {
     darkToggleSwitch,
     largeToggleSwitch,
   };
-
-  if (settings.darkEnabled) {
-    var darkText = "#fff"
-  } else {
-    var darkText = "#2F2F2F"
-  }
 
   // async function getSettings() {
   //   let sound = await SecureStore.getItemAsync('soundIsEnabled') === 'true' ? true : false;
