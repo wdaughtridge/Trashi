@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Pressable, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
+import * as SecureStore from 'expo-secure-store';
 
 // Utility
 import AppContext from './AppContext';
@@ -8,7 +9,7 @@ import styles from './Styles';
 
 // Icons
 import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Scanner = ({ navigation, route }) => {
   // State for radio buttons.
@@ -32,8 +33,25 @@ const Scanner = ({ navigation, route }) => {
     return <Text>No access to camera</Text>;
   }
 
+  var numItems = 0;
+  var key = 'numItems';
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value);
+  }
+
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key);
+    if (result) {
+      numItems = result;
+    }
+  }
+
+
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+    getValueFor(key);
+    numItems = numItems + 1;
+    save(key, numItems)
     console.log(data);
     navigation.navigate('Results', { upc: data });
   };

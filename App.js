@@ -56,6 +56,7 @@ const App = () => {
     readToggleSwitch,
     darkToggleSwitch,
     largeToggleSwitch,
+    numItems: 0
   };
 
   return (
