@@ -23,15 +23,16 @@ const Results = ({ navigation, route }) => {
 
     const [sound, setSound] = React.useState();
 
-    // async function playSound() {
-        // console.log('Loading Sound');
-        // const { sound } = await Audio.Sound.createAsync(
-        // require('./assets/chime.mp3')
-        // );
-        // setSound(sound);
+    async function playSound() {
+        console.log('Loading Sound');
+        const { sound } = await Audio.Sound.createAsync(
+            require('./assets/ding.m4a')
+        );
+        setSound(sound);
 
-        // console.log('Playing Sound');
-        // await sound.playAsync(); }
+        console.log('Playing Sound');
+        await sound.playAsync(); 
+    }
 
     React.useEffect(() => {
         return sound
@@ -53,6 +54,9 @@ const Results = ({ navigation, route }) => {
                 setItem(null);
                 setSuccess(false);
                 logFailedQuery();
+            }
+            if (settings.soundEnabled) {
+                playSound();
             }
         } catch (err) {
             setItem(null);
@@ -137,9 +141,6 @@ const Results = ({ navigation, route }) => {
     }, []);
 
     if ((item === null || regulation === null || Object.keys(regulation).length === 0 || Object.keys(regulation).length === 0) && success === true) {
-        if (settings.soundEnabled) {
-            // playSound();
-        }
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <View style={styles.contentArea}>
@@ -150,11 +151,6 @@ const Results = ({ navigation, route }) => {
     }
 
     if (item !== null && Object.keys(item).length !== 0 && regulation !== null && Object.keys(regulation).length !== 0) {
-        if (settings.soundEnabled) {
-            // playSound();
-        } else {
-            console.log("fuck");
-        }
         return (
             <SafeAreaView style={[styles.container, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <ScrollView style={styles.contentArea}>
