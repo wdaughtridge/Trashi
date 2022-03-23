@@ -72,6 +72,12 @@ const App = () => {
     largeToggleSwitch,
   };
 
+  if (settings.darkEnabled) {
+    var darkText = "#fff"
+  } else {
+    var darkText = "#2F2F2F"
+  }
+  
   checkForUUID();
 
   return (
@@ -83,9 +89,7 @@ const App = () => {
               if (route.name === 'Scan') {
                 return (
                   <Ionicons
-                    name={
-                      'home'
-                    }
+                    name={'barcode'}
                     size={size}
                     color={color}
                   />
@@ -106,12 +110,21 @@ const App = () => {
                     color={color}
                   />
                 );
+              }else if (route.name === 'Statistics') {
+                return (
+                  <Ionicons
+                    name={'bar-chart'}
+                    size={size}
+                    color={color}
+                  />
+                );
               }
             },
             tabBarInactiveTintColor: 'gray',
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: '#45B972',
           })}
         >
+          
           <Tab.Screen name="Scan" component={ScannerStackScreen} />
           <Tab.Screen name="Stats" component={Stats} />
           <Tab.Screen name="Settings" component={Settings} />
