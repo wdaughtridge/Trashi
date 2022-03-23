@@ -11,11 +11,6 @@ import styles from './Styles';
 const Settings = ({ navigation }) => {
     const settings = useContext(AppContext);
 
-    const getColor = (navigation) => {
-        let darkColor = "#fff"
-    }
-    
-
     return (
         <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
             <Text style={[styles.font, settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Settings</Text> 
