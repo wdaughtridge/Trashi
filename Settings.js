@@ -1,14 +1,21 @@
 import React, { useContext } from "react";
-import { View, Switch, Text } from 'react-native';
+import { View, Switch, Text, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 // Utility
 import AppContext from './AppContext';
 import styles from './Styles';
 
+import * as SecureStore from 'expo-secure-store';
 
 const Settings = ({ navigation }) => {
     const settings = useContext(AppContext);
+
+    async function clearProgress() {
+        await SecureStore.setItemAsync('Glass_Bottle', '0');
+        await SecureStore.setItemAsync('Plastic_Bottle', '0');
+        await SecureStore.setItemAsync('Metal', '0');
+    }
 
     return (
         <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
@@ -58,6 +65,9 @@ const Settings = ({ navigation }) => {
                         style={styles.settingsToggle}
                     />
                 </View>
+                <Pressable style={styles.button} onPress={() => {
+                    clearProgress();
+                }}><Text style={settings.largeEnabled ? styles.textLarge : styles.text}>Clear Scanning Progress</Text></Pressable>
             <StatusBar style={"auto"}/>
         </View>
     );
