@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Dimensions, ActivityIndicator, SafeAreaView } from 'react-native';
+import { View, Dimensions, ActivityIndicator, SafeAreaView, Text } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -14,6 +14,7 @@ const Stats = ({ navigation }) => {
     const [plasticBottles, setPlasticBottles] = useState(null);
     const [glassBottles, setGlassBottles] = useState(null);
     const [metals, setMetals] = useState(null);
+    const [count, itemsCount] = useState(null);
 
     async function getStats() {
         let plasticBottlesCount = await SecureStore.getItemAsync("Plastic_Bottle");
@@ -31,6 +32,7 @@ const Stats = ({ navigation }) => {
         setPlasticBottles(parseInt(plasticBottlesCount));
         setGlassBottles(parseInt(glassBottlesCount));
         setMetals(parseInt(metalsCount));
+
     }
 
     useFocusEffect(
@@ -46,6 +48,7 @@ const Stats = ({ navigation }) => {
 
     if (plasticBottles === null || glassBottles === null || metals === null) {
         return (
+
             <SafeAreaView style={styles.container}>
                 <View style={styles.contentArea}>
                     <ActivityIndicator size="large" />
@@ -66,9 +69,14 @@ const Stats = ({ navigation }) => {
             backgroundGradientTo: '#08130D',
             color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`
         }
-
+        let itemsCount = plasticBottles + metals + glassBottles;
         return (
             <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
+                <Text style={[settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>My Progress</Text>
+                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Total Recycled Items: {itemsCount}</Text>
+                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Plastic: {plasticBottles}</Text>
+                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Glass: {glassBottles}</Text>
+                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Metals: {metals}</Text>
                 <PieChart
                     data={data}
                     width={Dimensions.get('window').width}
