@@ -15,6 +15,7 @@ const Stats = ({ navigation }) => {
     const [glassBottles, setGlassBottles] = useState(null);
     const [metals, setMetals] = useState(null);
     const [count, itemsCount] = useState(null);
+    const [paper, setPaper] = useState(null);
 
     async function getStats() {
         let plasticBottlesCount = await SecureStore.getItemAsync("Plastic_Bottle");
@@ -29,9 +30,11 @@ const Stats = ({ navigation }) => {
         if (metalsCount === null) {
             metalsCount = 0;
         }
+        paperCount = 0;
         setPlasticBottles(parseInt(plasticBottlesCount));
         setGlassBottles(parseInt(glassBottlesCount));
         setMetals(parseInt(metalsCount));
+        setPaper(parseInt(paperCount))
 
     }
 
@@ -56,12 +59,16 @@ const Stats = ({ navigation }) => {
             </SafeAreaView>
         );
     }
-
+    var sizeText = 15;
+    if (settings.largeEnabled == true){
+        sizeText = 20;
+    }
     if (plasticBottles != null || glassBottles != null || metals != null) {
         const data = [
-            { name: 'Plastic Bottles', population: plasticBottles, color: 'lightgreen', legendFontColor: '#7F7F7F', legendFontSize: 10 },
-            { name: 'Glass Bottles', population: glassBottles, color: 'green', legendFontColor: '#7F7F7F', legendFontSize: 10 },
-            { name: 'Metals', population: metals, color: 'darkgreen', legendFontColor: '#7F7F7F', legendFontSize: 10 },
+            { name: 'Plastic', population: plasticBottles, color: 'lightgreen', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
+            { name: 'Glass', population: glassBottles, color: 'green', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
+            { name: 'Metals', population: metals, color: 'darkgreen', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
+            { name: 'Paper', population: paper, color: 'darkseagreen', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
         ]
 
         const chartConfig = {
@@ -69,14 +76,13 @@ const Stats = ({ navigation }) => {
             backgroundGradientTo: '#08130D',
             color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`
         }
+
         let itemsCount = plasticBottles + metals + glassBottles;
         return (
             <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <Text style={[settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>My Progress</Text>
                 <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Total Recycled Items: {itemsCount}</Text>
-                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Plastic: {plasticBottles}</Text>
-                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Glass: {glassBottles}</Text>
-                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Metals: {metals}</Text>
+
                 <PieChart
                     data={data}
                     width={Dimensions.get('window').width}
