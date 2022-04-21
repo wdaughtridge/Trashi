@@ -11,23 +11,6 @@ import styles from './Styles';
 
 const Settings = ({ navigation }) => {
     const settings = useContext(AppContext);
-
-    // async function storeSettings() {
-    //     await SecureStore.setItemAsync('soundIsEnabled', settings.soundEnabled.toString());
-    //     await SecureStore.setItemAsync('readIsEnabled', settings.readEnabled.toString());
-    //     await SecureStore.setItemAsync('darkIsEnabled', settings.darkEnabled.toString());
-    //     await SecureStore.setItemAsync('largeIsEnabled', settings.largeEnabled.toString());
-    //     console.log('Stored settings.')
-    // }
-
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         return () => {
-    //             storeSettings();
-    //         };
-    //     }, [])
-    // );
-
     return (
         <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
             <Text style={[styles.font, settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Settings</Text> 
@@ -45,16 +28,6 @@ const Settings = ({ navigation }) => {
                     <Text style={styles.settingsDivider}>
 
                     </Text>
-                </View>
-                <View style={styles.settingsElement}>
-                    <Text style={[settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Read text aloud </Text>
-                    <Switch
-                        thumbColor="#fff"
-                        ios_backgroundColor={settings.readEnabled ? "#45B972" : "#BCBCBC"}
-                        onValueChange={settings.readToggleSwitch}
-                        value={settings.readEnabled}
-                        style={styles.settingsToggle}
-                    />
                 </View>
                 <View style={styles.settingsElement}>
                     <Text style={[settings.largeEnabled ? styles.settingsTextLarge : styles.settingsText, settings.darkEnabled ? styles.textDark : styles.textLight]}>Dark mode </Text>

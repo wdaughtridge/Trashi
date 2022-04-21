@@ -45,7 +45,6 @@ const Scanner = ({ navigation, route }) => {
     setTimeout(() => {setMessage((message + 1) % 3)}, 10000);
     return(
       <View>
-        {/*<Image style={styles.scanImage} source={require("./assets/holdingphone.png")}/>*/}
         <View style={styles.rectangle} />
         <View style={styles.borderRadius}>
           <Text style={[settings.largeEnabled ? styles.scannerInstructionTextLarge : styles.scannerInstructionText, {alignItems:'center', justifyContent: "center", marginTop:20}]}>{messages[message]}</Text>

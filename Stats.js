@@ -14,8 +14,9 @@ const Stats = ({ navigation }) => {
     const [plasticBottles, setPlasticBottles] = useState(null);
     const [glassBottles, setGlassBottles] = useState(null);
     const [metals, setMetals] = useState(null);
-    const [count, itemsCount] = useState(null);
+    const [count, setCount] = useState(null);
     const [paper, setPaper] = useState(null);
+    const [plastic, setPlastic] = useState(null);
 
     async function getStats() {
         let plasticBottlesCount = await SecureStore.getItemAsync("Plastic_Bottle");
@@ -30,12 +31,17 @@ const Stats = ({ navigation }) => {
         if (metalsCount === null) {
             metalsCount = 0;
         }
+        let plasticCount = await SecureStore.getItemAsync("Plastic");
+        if (plasticCount === null) {
+            plasticCount = 0;
+        }
         paperCount = 0;
         setPlasticBottles(parseInt(plasticBottlesCount));
         setGlassBottles(parseInt(glassBottlesCount));
         setMetals(parseInt(metalsCount));
-        setPaper(parseInt(paperCount))
-
+        setPaper(parseInt(paperCount));
+        setPlastic(parseInt(plasticCount) + parseInt(plasticBottlesCount));
+        setCount(plastic + glassBottles + metals);
     }
 
     useFocusEffect(
@@ -63,9 +69,9 @@ const Stats = ({ navigation }) => {
     if (settings.largeEnabled == true){
         sizeText = 20;
     }
-    if (plasticBottles != null || glassBottles != null || metals != null) {
+    if (plastic != null || glassBottles != null || metals != null) {
         const data = [
-            { name: 'Plastic', population: plasticBottles, color: 'lightgreen', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
+            { name: 'Plastic', population: plastic, color: 'lightgreen', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
             { name: 'Glass', population: glassBottles, color: 'green', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
             { name: 'Metals', population: metals, color: 'darkgreen', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
             { name: 'Paper', population: paper, color: 'darkseagreen', legendFontColor: '#7F7F7F', legendFontSize: sizeText },
@@ -77,11 +83,10 @@ const Stats = ({ navigation }) => {
             color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`
         }
 
-        let itemsCount = plasticBottles + metals + glassBottles;
         return (
             <View style={[styles.settingsContainer, settings.darkEnabled ? styles.backgroundDark : styles.backgroundLight]}>
                 <Text style={[settings.largeEnabled ? styles.titleTextLarge : styles.titleText, settings.darkEnabled ? styles.textDark : styles.textLight]}>My Progress</Text>
-                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Total Recycled Items: {itemsCount}</Text>
+                <Text style={[settings.largeEnabled ? styles.h2Large : styles.h2, settings.darkEnabled ? styles.textDark : styles.textLight]}>Total Recycled Items: {count}</Text>
 
                 <PieChart
                     data={data}
