@@ -2,8 +2,8 @@
 
 ## Environment Setup
 * `npm install -g expo-cli`
-* `npm install aws-amplify aws-amplify-react-native @react-native-community/netinfo @react-native-async-storage/async-storage @react-native-picker/picker`
 * `npm install`
+* `npm install aws-amplify aws-amplify-react-native @react-native-community/netinfo @react-native-async-storage/async-storage @react-native-picker/picker`
 * Download *Expo Go* app on mobile phone
 
 ## Run App
